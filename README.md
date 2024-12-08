@@ -14,7 +14,7 @@ A classic Asteroids-inspired game built with JavaFX. The game involves controlli
 Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/Asteroids.git
+   git clone https://github.com/MateoAgolli/Asteroids.git
    ```
    
 Open the project in your preferred IDE (e.g., IntelliJ IDEA).  
