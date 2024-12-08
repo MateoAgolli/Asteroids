@@ -11,13 +11,17 @@ A classic Asteroids-inspired game built with JavaFX. The game involves controlli
 - Sound effects to enhance the gaming experience.
 
 ## Installation
-1. Clone the repository to your local machine:
+Clone the repository to your local machine:
 
    ```bash
    git clone https://github.com/yourusername/Asteroids.git
+   ```
    
 Open the project in your preferred IDE (e.g., IntelliJ IDEA).  
-Run the project using your IDE or by compiling it from the command line.  
+Run the project using your IDE or by compiling it from the command line.
+
+Or
+
 If you prefer to play directly, you can download the "Asteroids_Setup.exe" file from the [Releases](https://github.com/MateoAgolli/Asteroids/releases/tag/v1.0.0) section and run it.
 
 ## How to play
