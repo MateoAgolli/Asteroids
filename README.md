@@ -18,7 +18,7 @@ A classic Asteroids-inspired game built with JavaFX. The game involves controlli
    
 Open the project in your preferred IDE (e.g., IntelliJ IDEA).  
 Run the project using your IDE or by compiling it from the command line.  
-If you prefer to play directly, you can download the "Asteroids_Setup.exe" file from the [Releases](https://github.com/MateoAgolli/Asteroids/releases) section and run it.
+If you prefer to play directly, you can download the "Asteroids_Setup.exe" file from the [Releases](https://github.com/MateoAgolli/Asteroids/releases/tag/v1.0.0) section and run it.
 
 ## How to play
 ```
