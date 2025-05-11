@@ -46,6 +46,7 @@ If you prefer to play directly, you can download the "Asteroids_Setup.exe" file 
 ![Screenshot4](screenshots/Asteroids4.png)
 ![Screenshot5](screenshots/Asteroids5.png)
 ![Screenshot6](screenshots/Asteroids6.png)
+![Screenshot7](screenshots/Asteroids7.png)
 
 ## Credits
 - **JavaFX**: Used for creating the graphics and UI components of the game.
