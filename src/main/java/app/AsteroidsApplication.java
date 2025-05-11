@@ -62,6 +62,8 @@ public class AsteroidsApplication extends Application {
     public void start(Stage window) {
         window.setTitle("Asteroids!");
 
+        DatabaseManager.createTable();
+
         asteroidChance = 0.02;
         speedMultiplier = 1.3;
         resizePercentage = 1.0;
@@ -444,17 +446,20 @@ public class AsteroidsApplication extends Application {
         Button playAgain = new Button("Play Again");
         styleButton(playAgain);
 
+        Button highScoresButton = new Button("High Scores");
+        styleButton(highScoresButton);
+
         Button exit = new Button("Exit");
         styleButton(exit);
 
-        HBox playExit = new HBox();
-        playExit.getChildren().addAll(playAgain, exit);
-        playExit.setSpacing(20);
-        playExit.setAlignment(Pos.CENTER);
+        HBox buttonLayout = new HBox();
+        buttonLayout.getChildren().addAll(playAgain, highScoresButton, exit);
+        buttonLayout.setSpacing(20);
+        buttonLayout.setAlignment(Pos.CENTER);
 
         layout.add(gameOverLabel, 0, 0);
         layout.add(pointsContainer, 0, 1);
-        layout.add(playExit, 0, 2);
+        layout.add(buttonLayout, 0, 2);
 
         exit.setOnAction(event -> window.close());
 
@@ -468,6 +473,17 @@ public class AsteroidsApplication extends Application {
 
             playSound("game-start.mp3");
         });
+
+        highScoresButton.setOnAction(event -> {
+            isManualResize = false;
+
+            BorderPane highScoresLayout = highScoresLayout(window, window.getScene());
+
+            Scene highScoreScene = new Scene(highScoresLayout, Color.BLACK);
+            window.setScene(highScoreScene);
+        });
+
+        DatabaseManager.insertHighScore(Integer.valueOf(pointsText.get()));
 
         return layout;
     }
@@ -666,8 +682,18 @@ public class AsteroidsApplication extends Application {
         text.setFont(Font.font("Arial", 20));
         text.setTextFill(Color.WHITE);
 
+        HBox buttonsLayout = new HBox();
+
         Button howToPlayButton = new Button("How to Play");
         styleButton(howToPlayButton);
+
+        Button highScoresButton = new Button("High Scores");
+        styleButton(highScoresButton);
+
+        buttonsLayout.setAlignment(Pos.CENTER);
+        buttonsLayout.setSpacing(20);
+
+        buttonsLayout.getChildren().addAll(howToPlayButton, highScoresButton);
 
         Label finalSentence = new Label("Can you survive the asteroid storm and set a high score?");
         finalSentence.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -676,7 +702,7 @@ public class AsteroidsApplication extends Application {
         Button startGame = new Button("Start Game");
         styleButton(startGame);
 
-        layout.getChildren().addAll(welcomeLabel, text, howToPlayButton, finalSentence, startGame);
+        layout.getChildren().addAll(welcomeLabel, text, buttonsLayout, finalSentence, startGame);
 
         Scene welcomeScene = new Scene(layout, Color.BLACK);
 
@@ -737,6 +763,53 @@ public class AsteroidsApplication extends Application {
             });
         });
 
+        highScoresButton.setOnAction(event -> {
+            isManualResize = false;
+
+            BorderPane highScoresLayout = highScoresLayout(window, welcomeScene);
+
+            Scene highScoreScene = new Scene(highScoresLayout, Color.BLACK);
+            window.setScene(highScoreScene);
+        });
+
         window.setScene(welcomeScene);
+    }
+
+    private BorderPane highScoresLayout(Stage window, Scene previousScene) {
+        BorderPane highScoresLayout = new BorderPane();
+        highScoresLayout.setPrefSize(WIDTH, HEIGHT);
+        highScoresLayout.setPadding(new Insets(20, 20, 20, 20));
+
+        BackgroundImage bg = createBackground();
+        highScoresLayout.setBackground(new Background(bg));
+
+        Label highScoresLabel = new Label("Top 10 High Scores");
+
+        Label highScores = new Label("");
+        ArrayList<String> highScoresArrayList = DatabaseManager.getTopHighScores();
+        for (String score : highScoresArrayList) {
+            highScores.setText(highScores.getText() + score + "\n");
+        }
+
+        highScoresLabel.setFont(Font.font("Arial", FontWeight.BOLD, 25));
+        highScoresLabel.setTextFill(Color.WHITE);
+
+        highScores.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        highScores.setTextFill(Color.WHITE);
+
+        highScoresLayout.setTop(highScoresLabel);
+        highScoresLayout.setCenter(highScores);
+
+        Button x = new Button("x");
+        styleButton(x);
+        highScoresLayout.setRight(x);
+
+        x.setOnAction(event2 -> {
+            isManualResize = false;
+            window.setScene(previousScene);
+            isManualResize = true;
+        });
+
+        return highScoresLayout;
     }
 }
