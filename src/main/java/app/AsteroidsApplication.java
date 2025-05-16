@@ -62,7 +62,7 @@ public class AsteroidsApplication extends Application {
     public void start(Stage window) {
         window.setTitle("Asteroids!");
 
-        DatabaseManager.createTable();
+        DatabaseManager.initializeDatabase();
 
         asteroidChance = 0.02;
         speedMultiplier = 1.3;
